@@ -11,6 +11,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.crunian.rain.graphics.Screen;
+import com.crunian.rain.input.Keyboard;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
@@ -21,8 +22,10 @@ public class Game extends Canvas implements Runnable{
 	public static String title = "Rain";
 	
 	private Thread thread;
-	private JFrame frame;  
+	private JFrame frame; 
+	private Keyboard key;
 	private boolean running = false;
+	
 	private Screen screen;
 	
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -32,13 +35,13 @@ public class Game extends Canvas implements Runnable{
 		Dimension size = new Dimension(width*scale, height*scale);
 		setPreferredSize(size);
 		
-		screen = new Screen(width, height);
-		
+		screen = new Screen(width, height);		
 		frame = new JFrame();
+		key = new Keyboard();
 		
+		addKeyListener(key);
 	}
-	
-	
+		
 	public synchronized void start() {
 		running = true;
 		thread = new Thread(this, "Display");
@@ -85,6 +88,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	int x = 0, y = 0;
 	public void update() {
+		key.update();
 		x++;
 		y++;
 		
