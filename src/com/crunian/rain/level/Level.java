@@ -4,11 +4,11 @@ import com.crunian.rain.graphics.Screen;
 
 public class Level {
 
-	private int widht, height;
-	private int [] tiles;
+	protected int width, height;
+	protected int [] tiles;
 	
 	public Level(int width, int height) {
-		this.widht = width;
+		this.width = width;
 		this.height = height;
 		tiles = new int [width * height];
 		generateLevel();
@@ -18,7 +18,7 @@ public class Level {
 		loadLevel(path);
 	}
 	
-	private void generateLevel() {
+	protected void generateLevel() {
 	}
 	
 	private void loadLevel(String path) {
